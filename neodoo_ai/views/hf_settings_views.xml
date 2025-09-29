@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Configurações para API Hugging Face -->
+        <record id="res_config_settings_view_form_hf" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.ai.hf</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="neodoo_ai.res_config_settings_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='ai_settings']" position="inside">
+                    <div class="col-12 col-lg-6 o_setting_box">
+                        <div class="o_setting_left_pane">
+                            <field name="use_huggingface_api"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label for="use_huggingface_api"/>
+                            <div class="text-muted">
+                                Use Hugging Face API instead of OLG (Odoo Language Generation)
+                            </div>
+                            <div class="content-group" attrs="{'invisible': [('use_huggingface_api', '=', False)]}">
+                                <div class="row mt16">
+                                    <label for="hf_api_token" class="col-lg-3 o_light_label"/>
+                                    <field name="hf_api_token" password="True"/>
+                                </div>
+                                <div class="row mt16">
+                                    <label for="hf_model" class="col-lg-3 o_light_label"/>
+                                    <field name="hf_model" placeholder="google/flan-t5-large"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Parâmetros do sistema -->
+        <record id="hf_api_token_param" model="ir.config_parameter">
+            <field name="key">hf_api_token</field>
+            <field name="value">False</field>
+        </record>
+        <record id="hf_model_param" model="ir.config_parameter">
+            <field name="key">hf_model</field>
+            <field name="value">google/flan-t5-large</field>
+        </record>
+        <record id="use_huggingface_api_param" model="ir.config_parameter">
+            <field name="key">use_huggingface_api</field>
+            <field name="value">False</field>
+        </record>
+    </data>
+</odoo>
